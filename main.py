@@ -123,6 +123,10 @@ def transcribe(language, audiofile):
             return str(transcribedText)
 
 
+@app.route("/health", methods=["GET"])
+def health():
+    return str("Healty")
+
 @app.route("/", methods=["GET", 'POST'])
 def intro():
     resp = VoiceResponse()
