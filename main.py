@@ -134,7 +134,7 @@ def intro():
     status = request.values.get('CallStatus', None)
     print(number, file=sys.stderr)
     print(status, file=sys.stderr)
-    slack.chat.post_message('#phonecalls', '{0} is calling us.', number)
+    slack.chat.post_message('#phonecalls', 'Hi, I just called you...', number)
     with resp.gather(num_digits=1, action='/start-recording', method='POST', timeout=15) as g:
         g.say(text['introduction'])
 
@@ -146,13 +146,13 @@ def startRecording():
     resp = VoiceResponse()
 
     if 'Digits' in request.values and request.values['Digits'] == '1':
-        slack.chat.post_message('#phonecalls', '{0} has chosen to leave a dutch message.', request.values.get('From', None))
+        slack.chat.post_message(slack_channel, 'I pressed one, I will speak in Dutch.', request.values.get('From', None))
         resp.record(max_length=120, play_beep=True, action="/end-call-dutch")
     elif 'Digits' in request.values and request.values['Digits'] == '2':
-        slack.chat.post_message('#phonecalls', '{0} has chosen to leave an English message.', request.values.get('From', None))
+        slack.chat.post_message(slack_channel, 'I pressed two, I will speak in English.', request.values.get('From', None))
         resp.record(max_length=120, play_beep=True, action="/end-call-english")
     else:
-        slack.chat.post_message('#phonecalls', '{0} is detonating an A-Bomb!', request.values.get('From', None))
+        slack.chat.post_message(slack_channel, 'I will detonate an A-Bomb! I am a Rebel!!', request.values.get('From', None))
         resp.say(text['recording'])
         resp.gather(num_digits=1, action='/start-recording', timeout=15)
 
