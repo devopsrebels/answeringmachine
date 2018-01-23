@@ -8,10 +8,17 @@ RUN pip install -r requirements.txt
 
 ADD main.py /
 ADD runbook.json /
+ADD transcribefunction.py /
 
 ENV SLACK_TOKEN="supersecretslackbotapitokenthing"
-ENV SLACK_CHANNEL="lost+found"
+ENV SLACK_CHANNEL="phonecalls"
 ENV SLACK_AS_USER="doubledragon"
+ENV REDIS_URL="redis://redis:6379/0"
+ENV ALERT_SYSTEM="slack"
+ENV VOICEMAIL_DIR="voicemails/"
+ENV BUCKET_NAME="my-awesome-voicemails"
+ENV BUCKET_FOLDER='voicemails'
+ENV RUNBOOK="runbook.sample.json"
 
 EXPOSE 5000
 
