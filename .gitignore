@@ -4,3 +4,6 @@ voicemails/
 ./.idea/
 *.pyc
 runbook.json
+mockup/
+./mockup
+mockup.py
