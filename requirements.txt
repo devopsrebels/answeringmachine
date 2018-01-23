@@ -1,4 +1,5 @@
 Flask
+slackclient
 slacker
 twilio
 celery
